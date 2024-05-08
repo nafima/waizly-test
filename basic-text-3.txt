@@ -1,0 +1,12 @@
+<?php
+// Problem Solving Basic - Test 3 by Nanda Firmansyah
+function convertTo24HourClock($time12Hour) {
+    $date = DateTime::createFromFormat('h:i:sA', $time12Hour);
+    return $date->format('H:i:s');
+}
+
+$time12Hour = '01:05:45PM';
+$time24Hour = convertTo24HourClock($time12Hour);
+echo $time24Hour;
+
+// https://onlinephp.io/c/a324b

@@ -1,0 +1,29 @@
+<?php
+// Problem Solving Basic - Test 2 by Nanda Firmansyah
+function plusMinus($n, $arr) {
+    $positive = 0;
+    $negative = 0;
+    $zero = 0;
+
+    foreach ($arr as $num) {
+        if ($num > 0) {
+            $positive++;
+        } elseif ($num < 0) {
+            $negative++;
+        } else {
+            $zero++;
+        }
+    }
+
+    $positiveCalc = number_format($positive / $n, 6);
+    $negativeCalc = number_format($negative / $n, 6);
+    $zeroCalc = number_format($zero / $n, 6);
+
+    echo nl2br("$positiveCalc\n$negativeCalc\n$zeroCalc\n");
+}
+
+$n = 5;
+$arr = [-4, 1, 0, -1, -1];
+plusMinus($n, $arr);
+
+// https://onlinephp.io/c/93eae

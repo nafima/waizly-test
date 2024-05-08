@@ -1,0 +1,25 @@
+<?php
+
+// Problem Solving Basic - Test 1 by Nanda Firmansyah
+$n = 5;
+$beginning = 1;
+
+for ($wrapper = $beginning; $wrapper <= $n; $wrapper++) {
+	$sum = 0;
+	$word = '';
+	for($inner = $beginning; $inner <= $n; $inner++) {
+		if($wrapper !== $inner) {
+			$sum += $inner;
+			if($inner !== $n) {
+				$word .= $inner . ' + ';
+			} else {
+				$word .= $inner . ' = ' . $sum . '<br />';
+			}
+		} else if($inner === $n) {
+			$word = substr($word, 0, -2);
+			$word .= ' = ' . $sum;
+		}
+	}
+    echo nl2br($word);
+}
+// https://onlinephp.io/c/2a8d5
