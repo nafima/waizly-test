@@ -1,0 +1,32 @@
+1. SELECT * FROM employees;
+2. SELECT * FROM employees WHERE job_title = 'Manager';
+3. SELECT name, salary FROM employees WHERE departement IN ('Marketing', 'Sales');
+4. SELECT AVG(salary) AS average_salary FROM employees WHERE joined_date >= DATE_SUB(CURRENT_DATE, INTERVAL 5 YEAR);
+5. SELECT a.employee_id, a.name, SUM(b.sales) AS total_sales
+FROM employees a
+JOIN sales_data b ON a.employee_id = b.employee_id
+GROUP BY a.employee_id, a.name
+ORDER BY total_sales DESC
+LIMIT 5;
+6. SELECT a.name, a.salary, avg_salary.avg_department_salary
+FROM employees a
+JOIN (
+    SELECT department, AVG(salary) AS avg_department_salary
+    FROM employees
+    GROUP BY department
+) avg_salary ON a.department = avg_salary.department
+WHERE avg_salary.avg_department_salary > (
+    SELECT AVG(salary)
+    FROM employees
+)
+ORDER BY a.department, a.salary DESC;
+7. SELECT a.name, sum(b.sales) as total_sales, row_number() over (order by sum(b.sales) DESC) as rnk FROM employees a JOIN sales_data b ON a.employee_id = b.employee_id GROUP BY a.name;
+8. DELIMITER //
+CREATE PROCEDURE GetDepartmentTotalSalary(IN dept_name VARCHAR(255))
+BEGIN
+    SELECT 
+        name, salary
+    FROM employees
+    WHERE department = dept_name;
+END //
+DELIMITER ;
