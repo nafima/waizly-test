@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(uuid_generate_v4())'))->primary();
+            $table->uuid('role_id')->nullable(false);
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password')->nullable(false);
@@ -23,7 +24,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();
             $table->string('last_ip')->nullable();
-            $table->string('status')->enum('status', ['INACTIVE', 'ACTIVE', 'BANNED'])->default('INACTIVE');
+            $table->string('language')->enum('language', ['EN', 'ID'])->default('EN');
+            $table->string('status')->enum('status', ['INACTIVE', 'ACTIVE', 'BANNED', 'DELETED'])->default('INACTIVE');
             $table->integer('login_attempt')->default(0);
             $table->timestampTz('last_login')->nullable();
             $table->timestampTz('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
